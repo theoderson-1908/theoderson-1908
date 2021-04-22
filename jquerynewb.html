@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="C:\Users\Admin\OneDrive\Desktop\Softura\Day5\bootstrap-5.0.0-beta3-dist\css\bootstrap.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script>
+        $(document).ready(
+            function () {
+                var Data = " ";
+                $(".clsVal").blur(
+                    function () {
+                        var myVal = $(this).val();
+                        if (myVal == "")
+                            $(this).css("border-color", "Red");
+
+                        else
+                            Data = Data + " " + $(this).val();
+                    });
+                $("#ddlcity").change(function () {
+                    Data = Data + " " + $(this).val();
+                });
+                $("#btnSubmit").click(function () {
+                    $("#divData").html(Data);
+                });
+                //$("#btnReset").click(function () {
+                //    $("#divData").replaceWith("<h1>Reset Done<!!h1/>")
+                //});
+                $("#btnReset").click(function () {
+                    $("#divData").after("<h1>Reset Done<!!h1/>")
+                });
+            }
+        )
+
+
+    </script>
+
+</head>
+<body>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            background-color:aliceblue;
+        }
+        th, td {
+            padding: 15px;
+        }
+        table {
+        height:50px;
+        }
+        body {background-color:darkslategray;
+        }
+    </style>
+    <table style="width:100%">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Date of birth</th>
+            <th>Phone</th>
+        </tr>
+        <tr>
+            
+            <td><label for="txtFName"></label><input class="form-control clsVal" type="number" id="txtFName" required /></td>
+
+
+            
+            <td><label for="txtLName"></label><input class="form-control clsVal" type="text" id="txtLName" required /></td>
+
+
+            
+            <td><label for="txtAge"></label><input class="form-control clsVal" type="date" id="txtAge" min="18" max="56" /></td>
+
+
+            
+            <td><label for="txtPassword"><input class="form-control clsVal" type="number" id="txtPassword" maxlength="10" /></td>
+        </tr>
+
+
+
+
+
+        
+    </table>
+    <centre>
+    <input id="btnSubmit" type="submit" />
+    <input id="btnReset" type="reset"/>
+    </centre>
+    <div id="divData">
+
+    </div>
+</body>
+</html>
