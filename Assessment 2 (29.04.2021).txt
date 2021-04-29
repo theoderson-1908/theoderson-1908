@@ -1,0 +1,54 @@
+1) select city,count(au_lname) as Count_Of_Authors from authors group by city
+
+2)select au_fname,au_lname from authors where city not in(
+select city from publishers where pub_name='New Moon Books')
+
+3)create procedure proc_UpdatePrice1( @au_fname varchar(20),@au_lname varchar(20),@price float)
+as
+begin
+
+SELECT authors.au_fname,authors.au_lname,titles.price 
+FROM ((titles
+INNER JOIN titleauthor ON titles.title_id = titleauthor.title_id)
+INNER JOIN authors  ON titleauthor.au_id = authors.au_id)
+where au_fname=@au_fname and au_lname=@au_lname 
+
+execute proc_update @pprice=@price,@au_ffname=@au_fname,@au_llname=@au_lname
+end
+
+create procedure proc_update(@pprice float,@au_ffname varchar(20),@au_llname varchar(20))
+as 
+begin
+update titles
+set price=@pprice as new_price
+where  au_fname=@au_ffname and au_lname=@au_llname 
+end
+
+3) Alternate Way
+
+create proc proc_UpdatePrice(@au_lastname varchar(20), @au_firstname varchar(20), @new_price float)
+as
+begin
+   Update titles set price=@new_price
+   where title_id=(
+   select title_id from titleauthor where au_id=(
+   select au_id from authors 
+   where au_lname=@au_lastname and au_fname=@au_firstname))
+end
+
+4)create function fn_CalculateTaxForEveryBook (@quantity int)
+returns float
+as
+begin
+    declare
+	@Tax_percentage varchar(20)
+	if(@quantity<10)
+	   set @Tax_percentage='2%'
+	else if(@quantity>10 and @quantity<20)
+	   set @Tax_percentage='5%'
+	else if(@quantity>20 and @quantity<50)
+	   set @Tax_percentage='6%'
+	else
+	   set @Tax_percentage='7.5%'
+	return @Tax_percentage
+end
