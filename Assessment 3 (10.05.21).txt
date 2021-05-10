@@ -1,0 +1,315 @@
+1) 
+
+using System;
+using System.Collections.Generic;
+
+namespace Assessment_three
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List<int> num = new List<int>();
+            for (int i = 0; i< 10; i++)
+                num.Add(Convert.ToInt32(Console.ReadLine()));
+            Console.WriteLine("The Numbers Divisible Are ");
+            foreach(int i in num)
+                if (i%7==0)
+                    Console.WriteLine(i);
+            
+
+        }
+    }
+}
+
+
+2)
+
+using System;
+using System.Collections.Generic;
+
+namespace Assessment_three
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            
+
+
+            int ctr;
+            Console.WriteLine("Enter the Minimum Value: ");
+            int min = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Enter the maxuimum Value: ");
+            int max = Convert.ToInt32(Console.ReadLine());
+            Console.Write("The prime numbers between {0} and {1} are : \n", min, max);
+            if (max < min)
+                Console.WriteLine("Invalid Entry");
+            else
+            {
+                for (int num = min; num <= max; num++)
+                {
+                    ctr = 0;
+
+                    for (int i = 2; i <= num / 2; i++)
+                    {
+                        if (num % i == 0)
+                        {
+                            ctr++;
+                            break;
+                        }
+                    }
+
+                    if (ctr == 0 && num != 1)
+                        Console.WriteLine("{0} ", num);
+                }
+                Console.Write("\n");
+            }
+
+
+        }
+    }
+}
+
+
+5)
+
+using System;
+using System.Collections.Generic;
+
+namespace Assessment_three
+{
+    class Program
+    {
+       
+        public static void Main(string[] args)
+        {
+
+
+
+            for (int i = 0; i < 3;)
+            {
+                Console.WriteLine("Please Enter The User Name");
+                String u = Console.ReadLine();
+                Console.WriteLine("Please Enter The Password");
+                String p = Console.ReadLine();
+                if ((u == "Admin") & (p == "admin"))
+                {
+                    Console.WriteLine("Welcome");
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid User Name and Password");
+                    Console.WriteLine("Try Again");
+                    i++;
+                }
+                if (i==3)
+                    Console.WriteLine("Sorry you have already 3 times");
+            }
+
+           
+            
+3)
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+namespace Assessment_three
+{
+    class Program
+    {
+       
+        public static void Main(string[] args)
+        {
+            List<int> list = new List<int>();
+            bool value = true;
+            while (value)
+            {
+                int num=Convert.ToInt32(Console.ReadLine());
+                list.Add(num);
+                if (num < 0)
+                    value = false;
+            }
+            
+            IEnumerable<int> duplicates = list.GroupBy(x => x)
+                                       .Where(g => g.Count() > 1)
+                                       .Select(x => x.Key);
+           Console.WriteLine("Repeating numbers  are: " + String.Join(",", duplicates));
+            
+}}}
+
+4)
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+namespace Assessment_three
+{
+    class Program
+    {
+       
+        public static void Main(string[] args)
+        {
+            List<int> list = new List<int>();
+            bool value = true;
+            while (value)
+            {
+                int num=Convert.ToInt32(Console.ReadLine());
+                
+                if (num != 0)
+                    list.Add(num);
+                else
+                    value = false;
+            }
+            int[] arr = list.ToArray();
+            int temp;
+            for (int j = 0; j <= arr.Length - 2; j++)
+            {
+                for (int i = 0; i <= arr.Length - 2; i++)
+                {
+                    if (arr[i] > arr[i + 1])
+                    {
+                        temp = arr[i + 1];
+                        arr[i + 1] = arr[i];
+                        arr[i] = temp;
+                    }
+                }
+            }
+            Console.WriteLine("The Numbers After Sorting:");
+            foreach (int p in arr)
+                Console.WriteLine(p);
+            Console.Read();
+
+}}}
+
+6)
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+namespace Assessment_three
+{
+    class Program
+    {
+       
+        public static void Main(string[] args)
+        {
+            String[] w = new string[5] { "kite", "four", "neat", "play","goal" };
+            
+            //for (int i=0;i<4;i++)
+            //Console.WriteLine(words[0][0]);
+
+            for (int i = 0; i < 4; i++)
+            {
+                for (int j = 0; j < 3;)
+                {
+                    int cow = 0;
+                    int bull = 0;
+                    Console.WriteLine("Enter the Guess: ");
+                    string s = Console.ReadLine();
+                    char[] c = s.ToCharArray();
+                    for (int k = 0; k < 3;)
+                    {
+                        if (c[k] == w[i][k]) cow = cow + 1;
+                        else if (c[k] == w[i][0] || c[k] == w[i][1] || c[k] == w[i][2] || c[k] == w[i][3]) bull = bull + 1;
+                        else k++;
+                      
+                    }
+
+                    Console.WriteLine("cows-" + cow + " bulls-" + bull);
+                    
+                    if (cow == 4 && bull == 0)
+                    {
+                        Console.WriteLine("You win!!!");
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Try again");
+                        j++;
+                    }
+                }
+                Console.WriteLine("You Lost");
+            }
+
+}}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+
+
+
+            
+
+
+
+
+
+        }
+    }
+}
