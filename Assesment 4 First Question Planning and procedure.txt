@@ -1,0 +1,375 @@
+1)  Create a MVC application
+The application should take information about a person's profile
+Name, Age, Qualification, IsEmployed, NoticePeriod, CurrentCTC
+
+store the same in database.
+If the storage is successful then should redirect to a success page.
+If any error in the code then the error page should be displayed. 
+
+Solution:
+PLANNING:
+1)Create Model
+2)Create Context
+3)Create Repo and Service
+4)Inject the Repo
+5)Create Controller
+6)Take the Repo Injection
+7)Create the Action Methos
+8)Generate the Action
+
+PROCEDURE
+STEP 1:
+Install all the required NuGet Packages
+Entity Framework core
+Entity Framework core Sql Server
+Entity Framework core Tools
+
+STEP 2:
+Add a Profile Class in Model
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace AssesmentFourFIrstQuestion.Models
+{
+    public class Profile
+    {
+        [Key]
+        public string Name { get; set; }
+        public int Age { get; set; }
+        public string Qualification { get; set; }
+        public string IsEmploid { get; set; }
+        public string NoticePeriod { get; set; }
+        public float CurrentCTC { get; set; }
+    }
+}
+
+STEP 3:
+Add a class in model called ProfileContext
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+
+namespace AssesmentFourFIrstQuestion.Models
+{
+    public class ProfileContext:DbContext
+    {
+        public ProfileContext(DbContextOptions options):base(options)
+        { }
+        public DbSet<Profile> Profiles { get; set; }
+            
+
+    }
+}
+
+STEP 4:
+Go to App settings and set the Connection String which connects the framework and database
+
+{
+    "Logging": {
+        "LogLevel": {
+            "Default": "Information",
+            "Microsoft": "Warning",
+            "Microsoft.Hosting.Lifetime": "Information"
+        }
+    },
+    "ConnectionString": {
+        "con": "Server=DESKTOP-5DQD4CQ;Integrated Security=true;Database=dbProfile"
+    },
+  "AllowedHosts": "*"
+}
+
+STEP 5:
+Add a new Service Folder
+Add an Interface IProfileRepo for repostory
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace AssesmentFourFIrstQuestion.Service
+{
+   public interface IProfileRepo<T>
+    {
+        bool Register(T t);
+    }
+}
+
+STEP 6:
+Add a class in service called ProfileService to implement IProfileRepo and to describe the methods
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using AssesmentFourFIrstQuestion.Models;
+
+namespace AssesmentFourFIrstQuestion.Service
+{
+    public class ProfileService : IProfileRepo<Profile>
+    {
+        private readonly ProfileContext _context;
+        public ProfileService()
+        { }
+        public ProfileService(ProfileContext context)
+        {
+            _context = context;
+        }
+        public bool Register(Profile t)
+        {
+            try
+            {
+                _context.Profiles.Add(t);
+                _context.SaveChanges();
+                    
+            }
+            catch(Exception)
+            {
+                return false;
+            }
+            return false;
+        }
+    }
+}
+
+STEP 7:
+Inject the Repository in StartUP
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using AssesmentFourFIrstQuestion.Models;
+using AssesmentFourFIrstQuestion.Service;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+
+namespace AssesmentFourFIrstQuestion
+{
+    public class Startup
+    {
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
+        public IConfiguration Configuration { get; }
+
+        // This method gets called by the runtime. Use this method to add services to the container.
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddControllersWithViews();
+            services.AddDbContext<ProfileContext>(opts => opts.UseSqlServer(Configuration["ConnectionString:con"]));
+            services.AddScoped<IProfileRepo<Profile>, ProfileService>();
+        }
+
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+            }
+            app.UseStaticFiles();
+
+            app.UseRouting();
+
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+            });
+        }
+    }
+}
+
+STEP 8:
+Add a controller called ProfileController 
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using AssesmentFourFIrstQuestion.Models;
+using AssesmentFourFIrstQuestion.Service;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+
+namespace AssesmentFourFIrstQuestion.Controllers
+{
+    public class ProfileController : Controller
+    {
+        private readonly IProfileRepo<Profile> _repo;
+        public ProfileController(IProfileRepo<Profile> repo)
+        {
+            _repo = repo;
+        }
+        // GET: ProfileController
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        // GET: ProfileController/Details/5
+        public ActionResult Details(int id)
+        {
+            return View();
+        }
+
+        // GET: ProfileController/Create
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        // POST: ProfileController/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Register(Profile profile)
+        {
+            try
+            {
+                _repo.Register(profile);
+                TempData["Pn"] = profile.Name;
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: ProfileController/Edit/5
+        public ActionResult Edit(int id)
+        {
+            return View();
+        }
+
+        // POST: ProfileController/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, IFormCollection collection)
+        {
+            try
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: ProfileController/Delete/5
+        public ActionResult Delete(int id)
+        {
+            return View();
+        }
+
+        // POST: ProfileController/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id, IFormCollection collection)
+        {
+            try
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+    }
+}
+
+
+STEP 9:
+Add views to Register and Index Action Methods
+
+@model AssesmentFourFIrstQuestion.Models.Profile
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h1>Register</h1>
+
+<h4>Profile</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Register" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                @Html.EditorFor(m=>m.Name)
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Age" class="control-label"></label>
+                @Html.EditorFor(m=>m.Age)
+                <span asp-validation-for="Age" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Qualification" class="control-label"></label>
+                @Html.EditorFor(m=>m.Qualification)
+                <span asp-validation-for="Qualification" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IsEmploid" class="control-label"></label>
+                @Html.EditorFor(m=>m.IsEmploid)
+                <span asp-validation-for="IsEmploid" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NoticePeriod" class="control-label"></label>
+                @Html.EditorFor(m=>m.NoticePeriod)
+                <span asp-validation-for="NoticePeriod" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CurrentCTC" class="control-label"></label>
+                @Html.EditorFor(m=>m.CurrentCTC)
+                <span asp-validation-for="CurrentCTC" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+
+STEP 10:
+Add-Migration 
+Database will be created 
+
+Thus an mvc application is created ....
+
+
+
