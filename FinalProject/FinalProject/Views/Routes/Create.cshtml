@@ -1,0 +1,53 @@
+﻿@model FinalProject.Models.Route
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Route</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="StartingPoint" class="control-label"></label>
+                <input asp-for="StartingPoint" class="form-control" />
+                <span asp-validation-for="StartingPoint" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EndPoint" class="control-label"></label>
+                <input asp-for="EndPoint" class="form-control" />
+                <span asp-validation-for="EndPoint" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StopOne" class="control-label"></label>
+                <input asp-for="StopOne" class="form-control" />
+                <span asp-validation-for="StopOne" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StopTwo" class="control-label"></label>
+                <input asp-for="StopTwo" class="form-control" />
+                <span asp-validation-for="StopTwo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StopThree" class="control-label"></label>
+                <input asp-for="StopThree" class="form-control" />
+                <span asp-validation-for="StopThree" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
