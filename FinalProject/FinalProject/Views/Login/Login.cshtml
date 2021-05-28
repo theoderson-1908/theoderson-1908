@@ -1,0 +1,27 @@
+﻿@model FinalProject.Models.Login
+@{
+    Layout = null;
+}
+
+<h1> Login Page </h1>
+<div>
+    <form asp-action="Login">
+        <div>
+            <label asp-for="UserName"> User </label>
+            <input type="text" asp-for="UserName" />
+
+        </div>
+        <div>
+            <label asp-for="PassWord"> </label>
+            <input type="password" asp-for="PassWord" />
+
+        </div>
+        <div>
+            <input type="submit" value="Login" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+
+
+
+

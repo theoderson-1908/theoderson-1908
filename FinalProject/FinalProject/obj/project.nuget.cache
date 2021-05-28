@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "UyrzYbpusrjro1k4WSVX/D86IZ7tFgHm7i1gLRKXWoAby2NhPbBmQuSiPwLffdvGmRzN846HufzQyS2nIsPWCw==",
+  "dgSpecHash": "b2zi4EU4ooFT/lhC4Zdx8JVINgKcbflvhyRQOWw7MC8akum+xZ3JAUH2qHd9mK5h5rYyz+new05n2XiAefKrAg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\theo\\source\\repos\\FinalProject\\FinalProject\\FinalProject.csproj",
+  "projectFilePath": "C:\\Users\\theo\\Desktop\\Softura\\FinalProject\\FinalProject\\FinalProject.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\theo\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\theo\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",

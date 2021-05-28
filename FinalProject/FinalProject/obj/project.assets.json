@@ -7156,11 +7156,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\theo\\source\\repos\\FinalProject\\FinalProject\\FinalProject.csproj",
+      "projectUniqueName": "C:\\Users\\theo\\Desktop\\Softura\\FinalProject\\FinalProject\\FinalProject.csproj",
       "projectName": "FinalProject",
-      "projectPath": "C:\\Users\\theo\\source\\repos\\FinalProject\\FinalProject\\FinalProject.csproj",
+      "projectPath": "C:\\Users\\theo\\Desktop\\Softura\\FinalProject\\FinalProject\\FinalProject.csproj",
       "packagesPath": "C:\\Users\\theo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\theo\\source\\repos\\FinalProject\\FinalProject\\obj\\",
+      "outputPath": "C:\\Users\\theo\\Desktop\\Softura\\FinalProject\\FinalProject\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

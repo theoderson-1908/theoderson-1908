@@ -1,0 +1,41 @@
+﻿@model MaduraiTravels.Models.Login
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title> Log In </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+        div {
+            width: 600px;
+        }
+    </style>
+</head>
+<body>
+    <div class="alert alert-primary">
+        <form asp-action="Login">
+            <div>
+                <label asp-for="UserName">User</label>
+                <input type="text" class="form-control" asp-for="UserName" />
+
+
+            </div>
+            <div>
+                <label asp-for="PassWord" class="form-control"> PassWord </label>
+                <input type="password" class="form-control" asp-for="PassWord" />
+
+            </div>
+            <div>
+
+                <input type="submit" value="Login" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</body>
+</html>
