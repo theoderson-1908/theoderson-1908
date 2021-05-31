@@ -11,7 +11,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"></a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Transport Management System</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -31,7 +31,10 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Allocations" asp-action="Index">Allocated Table</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Logins" asp-action="Fail"> Log Out</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index"> Home Page</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Index"> Logout</a>
                         </li>
 
                     </ul>
@@ -46,9 +49,7 @@
     </div>
 
     <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2021 - AppoloTravels - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
+        
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

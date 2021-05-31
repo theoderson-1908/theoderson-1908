@@ -87,10 +87,10 @@ namespace AppoloTravels.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("RouteID,RouteNumber,StartingPoint,EndPoint,StopOne,StopTwo,StopThree,Distance")] Route route)
         {
-            if (id != route.RouteID)
-            {
-                return NotFound();
-            }
+          //  if (id != route.RouteID)
+            //{
+            //    return NotFound();
+           // }
 
             if (ModelState.IsValid)
             {
@@ -136,9 +136,9 @@ namespace AppoloTravels.Controllers
         // POST: Routes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int RouteID)
         {
-            var route = await _context.Routes.FindAsync(id);
+            var route = await _context.Routes.FindAsync(RouteID);
             _context.Routes.Remove(route);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

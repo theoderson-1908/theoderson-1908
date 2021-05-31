@@ -60,11 +60,14 @@ namespace AppoloTravels.Controllers
 
                 if (employee.BoardingPoint != null )
                 {
-                    var RoutesAvaiability = _context.Routes.Where(m => m.StartingPoint == employee.BoardingPoint); //|| m.StopOne == employee.BoardingPoint || m.StopTwo == employee.BoardingPoint || m.StopThree == employee.BoardingPoint);
+                    var RoutesAvaiability = _context.Routes.Where(m => m.StartingPoint == employee.BoardingPoint|| m.StopOne == employee.BoardingPoint || m.StopTwo == employee.BoardingPoint || m.StopThree == employee.BoardingPoint);
                     //Check Routes Availablity
+                  
                     if (RoutesAvaiability != null && RoutesAvaiability.Count() > 0)
-                    {
-                        var VehicleAvaiability = _context.Vehicles.Where(m => m.SeatsAvailable > 0 & m.Location == employee.BoardingPoint);
+                       
+                        {
+                        
+                      var VehicleAvaiability = _context.Vehicles.Where(m => m.SeatsAvailable > 0 & m.Location == employee.BoardingPoint);
                         // Check vehicle availability
                         if (VehicleAvaiability != null & VehicleAvaiability.Count() > 0)
                         {
@@ -104,14 +107,18 @@ namespace AppoloTravels.Controllers
                     }
                     else
                     {
-                        // Route Avaiablity
+                        return View();
                     }
 
+                }
+                else
+                {
+                    // if (employee.BoardingPoint != null )
                 }
 
 
 
-            }
+            }//Model State
             return View(employee);
         }
 
@@ -121,7 +128,7 @@ namespace AppoloTravels.Controllers
             if (id == null)
             {
                 return NotFound();
-            }
+         }
 
             var employee = await _context.Employees.FindAsync(id);
             if (employee == null)
@@ -187,11 +194,31 @@ namespace AppoloTravels.Controllers
         // POST: Employees/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int EmployeeID)
         {
-            var employee = await _context.Employees.FindAsync(id);
+            var employee = await _context.Employees.FindAsync(EmployeeID);
+            //    List<Allocation> d = new List<Allocation>();
+            var q = _context.Allocations.Where(m => m.EmployeeName == employee.EmployeeName).SingleOrDefault();
+            // _context.Allocations.Where(m => m.EmployeeName == employee.EmployeeName).ToList();
+            //    d = q.ToList();
+            //   _context.Allocations.Remove(d);
+            var SeatReduce = _context.Vehicles.Where(m => m.Location == employee.BoardingPoint);
+            var ChangedSeat = 0;
+            foreach(var value in SeatReduce)
+            {
+                ChangedSeat = value.SeatsAvailable;
+            }
+            ChangedSeat = ChangedSeat + 1;
+            await _context.Vehicles.Where(m => m.Location == employee.BoardingPoint).ForEachAsync(s => s.SeatsAvailable = ChangedSeat);
+            await _context.SaveChangesAsync();
+
+
+
+            _context.Allocations.Remove(q);
             _context.Employees.Remove(employee);
             await _context.SaveChangesAsync();
+
+
             return RedirectToAction(nameof(Index));
         }
 

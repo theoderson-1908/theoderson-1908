@@ -87,10 +87,10 @@ namespace AppoloTravels.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("DriverID,DriverName,DriverContactNumber,Location,VehicleNumber,Capacity,SeatsAvailable")] Vehicle vehicle)
         {
-            if (id != vehicle.DriverID)
-            {
-                return NotFound();
-            }
+           // if (id != vehicle.DriverID)
+           // {
+             //   return NotFound();
+            //}
 
             if (ModelState.IsValid)
             {
@@ -118,7 +118,7 @@ namespace AppoloTravels.Controllers
         // GET: Vehicles/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            if (id==null)
             {
                 return NotFound();
             }
@@ -136,9 +136,9 @@ namespace AppoloTravels.Controllers
         // POST: Vehicles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int DriverID)
         {
-            var vehicle = await _context.Vehicles.FindAsync(id);
+            var vehicle = await _context.Vehicles.FindAsync(DriverID);
             _context.Vehicles.Remove(vehicle);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

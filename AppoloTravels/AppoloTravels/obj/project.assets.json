@@ -7156,11 +7156,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\theo\\source\\repos\\AppoloTravels\\AppoloTravels\\AppoloTravels.csproj",
+      "projectUniqueName": "C:\\Users\\theo\\Desktop\\Softura\\AppoloTravels\\AppoloTravels\\AppoloTravels.csproj",
       "projectName": "AppoloTravels",
-      "projectPath": "C:\\Users\\theo\\source\\repos\\AppoloTravels\\AppoloTravels\\AppoloTravels.csproj",
+      "projectPath": "C:\\Users\\theo\\Desktop\\Softura\\AppoloTravels\\AppoloTravels\\AppoloTravels.csproj",
       "packagesPath": "C:\\Users\\theo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\theo\\source\\repos\\AppoloTravels\\AppoloTravels\\obj\\",
+      "outputPath": "C:\\Users\\theo\\Desktop\\Softura\\AppoloTravels\\AppoloTravels\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
