@@ -15,13 +15,14 @@ namespace AppoloTravels.Models
 
         [Required]
         [Display(Name = "Employee Name")]
+        [StringLength(30,MinimumLength =4,ErrorMessage ="Name should be atleast four characters")]
         public string EmployeeName { get; set; }
         [Required]
         public string Department { get; set; }
 
         [Required]
-        
-       
+        [StringLength(maximumLength: 10, MinimumLength = 10, ErrorMessage = "Phone number should be 10 digits")]
+
         public string Phone { get; set; }
 
         [Required]

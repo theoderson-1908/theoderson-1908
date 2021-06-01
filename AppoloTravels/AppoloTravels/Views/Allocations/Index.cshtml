@@ -9,13 +9,13 @@
         background-color: darkgrey;
     }
 </style>
-<h1>Allocated Table </h1>
+<h1>Allocated Vehicles </h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    @*<a asp-action="Create">Create New</a>*@
 </p>
 <table class="table">
-    <thead>
+    <thead >
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.EmployeeName)
@@ -54,9 +54,9 @@
                 @Html.DisplayFor(modelItem => item.VehicleNumber)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.AllocationID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.AllocationID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.AllocationID">Delete</a>
+                @*<a asp-action="Edit" asp-route-id="@item.AllocationID">Edit</a> |*@
+                <a asp-action="Details" asp-route-id="@item.AllocationID">View </a> 
+                @*<a asp-action="Delete" asp-route-id="@item.AllocationID">Delete</a>*@
             </td>
         </tr>
 }

@@ -66,37 +66,37 @@ namespace AppoloTravels.Controllers
                     if (RoutesAvaiability != null && RoutesAvaiability.Count() > 0)
                        
                         {
-                        
-                      var VehicleAvaiability = _context.Vehicles.Where(m => m.SeatsAvailable > 0 & m.Location == employee.BoardingPoint);
+
+
+
+                        var VehicleAvaiability = _context.Vehicles.Where(m => m.SeatsAvailable > 0 & m.Location == employee.BoardingPoint).FirstOrDefault();
                         // Check vehicle availability
-                        if (VehicleAvaiability != null & VehicleAvaiability.Count() > 0)
-                        {
+                      //  if (VehicleAvaiability != null & VehicleAvaiability.Count() > 0)
+                            if (VehicleAvaiability != null )
+                            {
                             _context.Add(employee);
                             // Reduce the Seats
-                            var final_seat = 0;
-                            var driver_name = "";
-                            var driver_contact_number = "";
-                            var vechile_no = "";
-                            foreach (var val in VehicleAvaiability)
-                            {
-                                final_seat = val.SeatsAvailable;
-                                driver_name = val.DriverName;
-                                driver_contact_number = val.DriverContactNumber;
-                                vechile_no = val.VehicleNumber;
-                            }
-
+                            int final_seat = VehicleAvaiability.SeatsAvailable;
+                            string driver_name = VehicleAvaiability.DriverName;
+                            string driver_contact_number = VehicleAvaiability.DriverContactNumber;
+                            string Vehicle_no = VehicleAvaiability.VehicleNumber;
+                            string location = VehicleAvaiability.Location;
                             final_seat = final_seat - 1;
-
-                            await _context.Vehicles.Where(m => m.Location == employee.BoardingPoint).ForEachAsync(s => s.SeatsAvailable = final_seat); ;
+                            await _context.Vehicles.Where(m => m.Location == location & m.DriverName==driver_name ).ForEachAsync(s => s.SeatsAvailable = final_seat);
                             await _context.SaveChangesAsync();
+
+
+
+
+                           
 
                             // Add Values to Allocation
                             var a_employee_name = employee.EmployeeName;
                             var a_boarding_location = employee.BoardingPoint;
                             var a_driver_name = driver_name;
                             var a_contact_number = driver_contact_number;
-                            var a_vechile_no = vechile_no;
-                            var a_allocations = new Allocation { BoardingPoint = a_boarding_location, DriverContactNumber = a_contact_number, DriverName = a_driver_name, EmployeeName = a_employee_name, VehicleNumber = a_vechile_no };
+                            var a_vehicle_no = Vehicle_no;
+                            var a_allocations = new Allocation { BoardingPoint = a_boarding_location, DriverContactNumber = a_contact_number, DriverName = a_driver_name, EmployeeName = a_employee_name, VehicleNumber = a_vehicle_no };
                              _context.Allocations.Add(a_allocations);
                             await _context.SaveChangesAsync();
 
@@ -202,14 +202,11 @@ namespace AppoloTravels.Controllers
             // _context.Allocations.Where(m => m.EmployeeName == employee.EmployeeName).ToList();
             //    d = q.ToList();
             //   _context.Allocations.Remove(d);
-            var SeatReduce = _context.Vehicles.Where(m => m.Location == employee.BoardingPoint);
-            var ChangedSeat = 0;
-            foreach(var value in SeatReduce)
-            {
-                ChangedSeat = value.SeatsAvailable;
-            }
+            var SeatReduce = _context.Vehicles.Where(m => m.Location == employee.BoardingPoint).FirstOrDefault();
+            int ChangedSeat = SeatReduce.SeatsAvailable;
+            string RemoveDriverName = SeatReduce.DriverName;    
             ChangedSeat = ChangedSeat + 1;
-            await _context.Vehicles.Where(m => m.Location == employee.BoardingPoint).ForEachAsync(s => s.SeatsAvailable = ChangedSeat);
+            await _context.Vehicles.Where(m => m.Location == employee.BoardingPoint & m.DriverName==RemoveDriverName).ForEachAsync(s => s.SeatsAvailable = ChangedSeat);
             await _context.SaveChangesAsync();
 
 

@@ -27,6 +27,7 @@ namespace AppoloTravels.Models
         public int Capacity { get; set; }
         [Required]
         [Display(Name ="Seats Available")]
+
         public int SeatsAvailable { get; set; }
 
 

@@ -1,6 +1,27 @@
 ﻿@{
     Layout = null;
 }
-<h1> Login Failed!!!! </h1>
 
-@Html.ActionLink("Try Again", "Login", "Login")
+<style>
+
+    div {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+    }
+    .head
+    {
+        text-align:center;
+        text-decoration-color:cadetblue;
+        
+    }
+</style>
+
+
+
+<h1 class="head"> Login Failed!!!! </h1>
+<div>
+    @Html.ActionLink("Try Again", "Login", "Login")
+
+</div>

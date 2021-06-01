@@ -46,13 +46,13 @@
         <form asp-action="Login">
             <div>
                 <label asp-for="UserName">Username</label>             
-                <input type="text" class="form-control" asp-for="UserName" />
+                <input type="text" class="form-control" asp-for="UserName" placeholder="Enter your Name" required />
 
 
             </div>
             <div>
                 <label asp-for="PassWord"> Password </label>
-                <input type="password" class="form-control" asp-for="PassWord" />
+                <input type="password" class="form-control" asp-for="PassWord" placeholder="Enter Password" required/>
 
             </div>
             <br>
