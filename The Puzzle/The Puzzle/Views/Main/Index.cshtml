@@ -1,0 +1,107 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = null;
+}
+
+
+<html>
+<head>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+<style>
+    .Log {
+        text-align: center;
+    }
+    div
+    {
+        text-align:center;
+    }
+</style>
+
+ </head>
+<body>
+
+    <h1 class="Log">Puzzle</h1>
+    <div>
+        <input type="button" class="btn btn-primary" OnClick="myfunction(this);" id="button1" secretValue="1" />
+        <input type="button" class="btn btn-primary" OnClick="myfunction(this);" id="button2" secretValue="2" />
+        <input type="button" class="btn btn-primary" onclick="myfunction(this);" id="button3" secretValue="3" />
+        <input type="button" class="btn btn-primary" onclick="myfunction(this);" id="button4" secretValue="4" />
+
+    </div>
+    <br>
+    <div>
+        <input type="button" class="btn btn-primary" onclick="myfunction(this);" id="button5" secretValue="5" />
+        <input type="button" class="btn btn-primary" onclick="myfunction(this);" id="button6" secretValue="6" />
+        <input type="button" class="btn btn-primary" onclick="myfunction(this);" id="button7" secretValue="7" />
+        <input type="button" class="btn btn-primary" onclick="myfunction(this);" id="button8" secretValue="8" />
+
+    </div>
+    <br>
+    <div>
+        <input type="button" class="btn btn-primary" onclick="myfunction(this);" id="button9" secretValue="5" />
+        <input type="button" class="btn btn-primary" onclick="myfunction(this);" id="button10" secretValue="6" />
+        <input type="button" class="btn btn-primary" onclick="myfunction(this);" id="button11" secretValue="7" />
+        <input type="button" class="btn btn-primary" onclick="myfunction(this);" id="button12" secretValue="8" />
+
+    </div>
+    <br>
+    <div>
+        <input type="button" class="btn btn-primary" onclick="myfunction(this);" id="button13" secretValue="1" />
+        <input type="button" class="btn btn-primary" onclick="myfunction(this);" id="button14" secretValue="2" />
+        <input type="button" class="btn btn-primary" onclick="myfunction(this);" id="button15" secretValue="3" />
+        <input type="button" class="btn btn-primary" onclick="myfunction(this);" id="button16" secretValue="4" />
+
+    </div>
+    <br>
+    <p id="demo"></p>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        var temp = 2;
+       
+
+
+        function myfunction(el) {
+            if (temp % 2 == 0) {
+                var id = $(el).attr('id');
+                var t = "#" + id;
+                $(t).val($(el).attr('secretValue'));
+                var a = $(el).attr('secretValue');
+                const pro = parseInt(a);
+                storeelement = 0 + pro;   
+                temp = temp + 1;
+                // parseInt(storeelement);
+                // storeelement = 130 + a;
+                // document.write(storeelement);
+               // temp = temp + 1;
+            }
+            else {
+                
+                var id1 = $(el).attr('id');
+                var s = "#" + id1;
+                var b = $(el).attr('secretValue');
+                const comp = parseInt(b);
+                var jan = storeelement;
+                if (storeelement == comp) {     
+                    $(s).val($(el).attr('secretValue'));
+                    temp = temp + 1;
+                    
+
+                }
+                else {
+                    $(s).val(" ");
+                    temp = temp + 1;
+                    
+                }
+            }
+
+
+        }
+
+
+    </script>
+
+</body>
+</html>
+
+
